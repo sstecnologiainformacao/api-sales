@@ -13,7 +13,12 @@ export default class OrderController {
     public async create(request: Request, response: Response): Promise<Response> {
         const { customer_id, products } = request.body;
         const service = new CreateOrderService();
-        const order  = service.execute({ customerId: customer_id, products });
-        return response.json(order);
+        try {
+            const order  = service.execute({ customerId: customer_id, products });
+            return response.json(order);
+        } catch (e) {
+            console.log(e);
+            return response.json(e);
+        }
     }
 }
