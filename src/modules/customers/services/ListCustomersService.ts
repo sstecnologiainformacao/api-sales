@@ -14,8 +14,8 @@ interface IPaginateCustomer {
 };
 
 class ListCustomersService {
-    public async execute(): Promise<IPaginateCustomer> {
-        return getCustomRepository(CustomerRepository).createQueryBuilder().paginate();
+    public async execute(): Promise<Customer[]> {
+        return getCustomRepository(CustomerRepository).find();
     }
 
 }

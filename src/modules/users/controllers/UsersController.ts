@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import { instanceToInstance } from 'class-transformer';
 import CreateUserService from "../services/CreateUserService";
 import ListUserService from "../services/ListUserService";
 
 export default class UsersController {
     public async index(request: Request, response: Response): Promise<Response> {
-        return response.json(await new ListUserService().execute());
+        return response.json(instanceToInstance(await new ListUserService().execute()));
     }
 
     public async create(request: Request, response: Response): Promise<Response> {
@@ -13,6 +14,6 @@ export default class UsersController {
             name, email, password,
         });
 
-        return response.json({ user: newUser });
+        return response.json({ user: instanceToInstance(newUser) });
     }
 }
