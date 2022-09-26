@@ -5,6 +5,8 @@ import { getCustomRepository } from "typeorm";
 import UserRepository from "../typeorm/repositories/UserRepository";
 import User from "../typeorm/entities/User";
 import DiskStorageProvider from '@shared/providers/storage/DiskStorageProvider';
+import upload from "@config/upload";
+import S3Storage from '@shared/providers/storage/S3StorageProvider';
 
 interface IRequest {
     id: string;
@@ -13,7 +15,6 @@ interface IRequest {
 
 class UpdateUserAvatarService {
     public async execute({ id, avatar }: IRequest): Promise<User>{
-        const diskStorage = new DiskStorageProvider();
         const repository = getCustomRepository(UserRepository);
         const user = await repository.findById(id);
 
@@ -21,13 +22,22 @@ class UpdateUserAvatarService {
              throw new AppError('User not found');
         }
 
-        if(user.avatar) {
-            await diskStorage.delete(user.avatar);
-        }
-        console.log(avatar);
-        const filename = await diskStorage.save(avatar);
+        if (upload.driver === 's3') {
+            const diskStorage = new S3Storage();
+            if(user.avatar) {
+                await diskStorage.delete(user.avatar);
+            }
 
-        user.avatar = filename;
+            user.avatar = await diskStorage.save(avatar);
+        } else {
+            const diskStorage = new DiskStorageProvider();
+            if(user.avatar) {
+                await diskStorage.delete(user.avatar);
+            }
+
+            user.avatar = await diskStorage.save(avatar);
+        }
+
         return await repository.save(user);
     }
 }

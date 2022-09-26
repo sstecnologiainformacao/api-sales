@@ -5,8 +5,8 @@ import uploadConfig from '@config/upload';
 export default class DiskStorageProvider {
     public async save(file: string): Promise<string> {
         await fs.promises.rename(
-            path.resolve(uploadConfig.directory, file),
             path.resolve(uploadConfig.dest, file),
+            path.resolve(uploadConfig.directory, file)
         );
         return file;
     }
