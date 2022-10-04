@@ -1,0 +1,15 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 15432,
+    "username": "postgres",
+    "password": "docker",
+    "database": "apivendas",
+    "migrations": [
+        "./dist/shared/typeorm/migrations/*.js"
+    ],
+    "entities": ["./dist/modules/**/typeorm/entities/*.js"],
+    "cli": {
+        "migrationsDir": "./dist/shared/typeorm/migrations"
+    }
+}
