@@ -31,13 +31,13 @@ class CustomerRepository implements ICustomersRepository {
         });
     }
 
-    public async create({ name, email }: ICreateCustomer): Promise<ICustomer> {
+    public async create({ name, email }: ICreateCustomer): Promise<Customer> {
         const customer = this.ormRepository.create({name, email});
         await this.ormRepository.save(customer);
         return customer;
     }
 
-    public async save(customer: Customer): Promise<ICustomer> {
+    public async save(customer: Customer): Promise<Customer> {
         await this.ormRepository.save(customer);
         return customer;
     }

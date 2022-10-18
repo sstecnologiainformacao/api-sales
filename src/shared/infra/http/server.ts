@@ -9,6 +9,7 @@ import cors from 'cors';
 import routes from './routes';
 import AppError from '@shared/errors/AppError';
 import '@shared/typeorm';
+import '@shared/container';
 import upload from '@config/upload';
 import rateLimiter from './routes/middleware/rateLimiter';
 
