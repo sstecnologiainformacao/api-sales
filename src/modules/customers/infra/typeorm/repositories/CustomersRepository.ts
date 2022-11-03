@@ -42,6 +42,15 @@ class CustomerRepository implements ICustomersRepository {
         return customer;
     }
 
+    public async delete(customer: Customer): Promise<Customer> {
+        await this.ormRepository.delete(customer);
+        return customer;
+    }
+
+    public async find(): Promise<ICustomer[]> {
+        return await this.ormRepository.find();
+    }
+
 }
 
 export default CustomerRepository;

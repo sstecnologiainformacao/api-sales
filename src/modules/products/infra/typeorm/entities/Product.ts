@@ -1,15 +1,17 @@
-import OrdersProducts from '@modules/orders/typeorm/entities/OrdersProducts';
+import { IOrdersProducts } from '@modules/orders/domain/models/IOrdersProducts';
+import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
+import { IProduct } from '@modules/products/domain/models/IProduct';
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('products')
-class Product {
+class Product implements IProduct{
     @PrimaryGeneratedColumn('uuid') id: string;
     @Column() name: string;
     @Column('decimal') price: number;
     @Column('int') quantity: number;
 
     @OneToMany(() => OrdersProducts, order_products => order_products.product)
-    orderProducts: OrdersProducts[];
+    orderProducts: IOrdersProducts[];
 
     @CreateDateColumn() created_at: Date;
     @UpdateDateColumn() updated_at: Date;
