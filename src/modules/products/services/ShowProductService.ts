@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
 import AppError from "@shared/errors/AppError";
-import { getCustomRepository } from "typeorm";
 import { IProductsRepository } from "../domain/repositories/IProductsRepository";
 import { IProduct } from "../domain/models/IProduct";
 
