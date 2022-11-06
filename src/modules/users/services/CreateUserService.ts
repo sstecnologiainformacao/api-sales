@@ -1,8 +1,8 @@
+import { injectable, inject } from 'tsyringe';
 import AppError from "@shared/errors/AppError";
-import { getCustomRepository } from "typeorm";
-import UserRepository from "../typeorm/repositories/UserRepository";
-import User from "../typeorm/entities/User";
 import { hash } from "bcryptjs";
+import { IUserRepository } from '../domain/repositories/IUserRepository';
+import { IUser } from '../domain/models/IUser';
 
 interface IRequest {
     name: string;
@@ -10,10 +10,14 @@ interface IRequest {
     password: string;
 }
 
+@injectable()
 class CreateUserService {
-    public async execute({ name, email, password }: IRequest): Promise<User>{
-        const repository = getCustomRepository(UserRepository);
-        const exists = await repository.findByEmail(email);
+    constructor(
+        @inject('UserRepository') private repository: IUserRepository,
+    ){}
+
+    public async execute({ name, email, password }: IRequest): Promise<IUser>{
+        const exists = await this.repository.findByEmail(email);
 
         if (exists) {
             throw new AppError(`The email ${email} is already used`);
@@ -21,11 +25,11 @@ class CreateUserService {
 
         const hashedPassword = await hash(password, 8);
 
-        const product = repository.create({
+        const user = await this.repository.create({
             name, email, password: hashedPassword,
         });
 
-        return await repository.save(product);
+        return await this.repository.save(user);
     }
 }
 

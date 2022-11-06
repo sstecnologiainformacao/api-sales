@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 import ProductsController from '../controllers/ProductsController';
-import isAuthenticated from '@shared/http/routes/middleware/isAuthenticated';
+import isAuthenticated from '@shared/infra/http/routes/middleware/isAuthenticated';
 
 const router = Router();
 const controller = new ProductsController();

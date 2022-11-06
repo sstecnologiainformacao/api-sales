@@ -1,17 +1,20 @@
+import { injectable, inject } from 'tsyringe';
 import AppError from "@shared/errors/AppError";
-import { getCustomRepository } from "typeorm";
-import User from "../typeorm/entities/User";
-import UserRepository from "../typeorm/repositories/UserRepository";
+import { IUserRepository } from '../domain/repositories/IUserRepository';
+import { IUser } from '../domain/models/IUser';
 
 interface IRequest {
     id: string;
 }
 
+@injectable()
 class ShowProductService {
+    constructor(
+        @inject('UserRepository') private repository: IUserRepository,
+    ){}
 
-    public async execute({ id }: IRequest): Promise<User> {
-        const repository = getCustomRepository(UserRepository);
-        const users = await repository.findOne(id);
+    public async execute({ id }: IRequest): Promise<IUser> {
+        const users = await this.repository.findOne(id);
 
         if (!users) {
             throw new AppError('User not found');

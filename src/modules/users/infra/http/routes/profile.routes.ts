@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { celebrate, Segments } from "celebrate";
 import Joi from "joi";
-import isAuthenticated from "@shared/http/routes/middleware/isAuthenticated";
 import ProfileContoller from "../controllers/ProfileController";
+import isAuthenticated from "@shared/infra/http/routes/middleware/isAuthenticated";
 
 const router = Router();
 const controller = new ProfileContoller();

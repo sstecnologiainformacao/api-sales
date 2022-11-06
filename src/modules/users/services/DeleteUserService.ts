@@ -1,18 +1,21 @@
 import AppError from "@shared/errors/AppError";
-import { getCustomRepository } from "typeorm";
-import UserRepository from "../typeorm/repositories/UserRepository";
+import { injectable, inject } from 'tsyringe';
+import { IUserRepository } from "../domain/repositories/IUserRepository";
 
+@injectable()
 class DeleteUserService {
+    constructor(
+        @inject('UserRepository') private repository: IUserRepository,
+    ){}
 
     public async execute(id: string): Promise<void> {
-        const repository = getCustomRepository(UserRepository);
-        const exists = await repository.findOne(id);
+        const exists = await this.repository.findOne(id);
 
         if(!exists) {
             throw new AppError('User not found');
         }
 
-        repository.remove(exists);
+        this.repository.remove(exists);
     }
 }
 
