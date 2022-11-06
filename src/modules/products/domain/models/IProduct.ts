@@ -1,8 +1,14 @@
 import { IOrdersProducts } from "@modules/orders/domain/models/IOrdersProducts";
 
 export interface CreateOrderProduct {
-    productId: string;
+    name?: string;
+    productId?: string;
     price: number;
+    quantity: number;
+}
+
+export interface IUpdateProduct {
+    id: string;
     quantity: number;
 }
 

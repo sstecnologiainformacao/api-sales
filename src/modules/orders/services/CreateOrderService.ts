@@ -1,4 +1,4 @@
-import { inject, injectable } from "tsyringe"
+import { inject, injectable } from "tsyringe";
 import AppError from "@shared/errors/AppError";
 import { IOrder } from "../domain/models/IOrder";
 import { IOrdersRepository } from "../domain/repositories/IOrdersRepository";
@@ -78,7 +78,7 @@ class CreateOrderService {
             })
         );
 
-        await this.productRepository.save(updatedProductQuantity);
+        await this.productRepository.saveAll(updatedProductQuantity);
 
         return order;
     }

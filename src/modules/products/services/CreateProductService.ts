@@ -23,7 +23,7 @@ class CreateProductService {
             throw new AppError(`A product named ${name} exists`);
         }
 
-        const product = this.repository.create({
+        const product = await this.repository.create({
             name, price, quantity,
         });
 
