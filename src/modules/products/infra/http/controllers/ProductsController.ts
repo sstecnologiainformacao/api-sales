@@ -1,42 +1,46 @@
+import { container } from 'tsyringe';
 import { Request, Response } from "express";
-import { DeleteDateColumn, UpdateDateColumn } from "typeorm";
-import CreateProductService from "../services/CreateProductService";
-import DeleteProductService from "../services/DeleteProductService";
-import ListProductService from "../services/ListProductService";
-import ShowProductService from "../services/ShowProductService";
-import UpdateProductService from "../services/UpdateProductService";
-import Product from "../typeorm/entities/Product";
-
+import { IProduct } from '@modules/products/domain/models/IProduct';
+import ListProductService from '@modules/products/services/ListProductService';
+import ShowProductService from '@modules/products/services/ShowProductService';
+import CreateProductService from '@modules/products/services/CreateProductService';
+import UpdateProductService from '@modules/products/services/UpdateProductService';
+import DeleteProductService from '@modules/products/services/DeleteProductService';
 
 export default class ProductsController {
 
     public async index(request: Request, response: Response): Promise<Response> {
-        const products: Array<Product> = await new ListProductService().execute();
+        const service = container.resolve(ListProductService);
+        const products: Array<IProduct> | null = await service.execute();
         return response.json(products);
     }
 
     public async show(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
-        const product: Product = await new ShowProductService().execute({ id });
+        const service = container.resolve(ShowProductService);
+        const product: IProduct | null = await service.execute({ id });
         return response.json(product);
     }
 
     public async create(request: Request, response: Response): Promise<Response> {
         const { name, price, quantity } = request.body;
-        const product = await new CreateProductService().execute({ name, price, quantity });
+        const service = container.resolve(CreateProductService);
+        const product = await service.execute({ name, price, quantity });
         return response.json(product);
     }
 
     public async update(request: Request, response: Response): Promise<Response> {
         const { name, price, quantity } = request.body;
         const { id } = request.params;
-        const product = await new UpdateProductService().execute({ id, name, price, quantity });
+        const service = container.resolve(UpdateProductService);
+        const product = await service.execute({ id, name, price, quantity });
         return response.json(product);
     }
 
     public async delete(request: Request, response: Response) {
         const { id } = request.params;
-        await new DeleteProductService().execute(id);
+        const service = container.resolve(DeleteProductService);
+        await service.execute(id);
         return response.json([]);
     }
 };

@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { instanceToInstance } from 'class-transformer';
-import ShowProfileService from "../services/ShowProfileService";
-import UpdateProfileService from "../services/UpdateProfileService";
+import { container } from 'tsyringe';
+import ShowProfileService from "@modules/users/services/ShowProfileService";
+import UpdateProfileService from "@modules/users/services/UpdateProfileService";
 
 export default class ProfileContoller {
     public async show(request: Request, response: Response): Promise<Response> {
-        const service = new ShowProfileService();
+
+        const service = container.resolve(ShowProfileService);
         const userId = request.user.id;
 
         const user = await service.execute({ userId });
@@ -16,7 +18,7 @@ export default class ProfileContoller {
         const userId = request.user.id;
         const { name, email, password, actualPassword } = request.body;
 
-        const service = new UpdateProfileService();
+        const service = container.resolve(UpdateProfileService);
         const user = await service.execute({ userId, name, email, password, actualPassword});
 
         return response.json(instanceToInstance(user));
