@@ -15,7 +15,7 @@ interface IRequest {
 @injectable()
 class UpdateProductService {
     constructor(
-        @inject('ProductRepository') private repository: IProductsRepository
+        @inject('ProductsRepository') private repository: IProductsRepository
     ) {}
 
     public async execute({ id, name, price, quantity}: IRequest): Promise<IProduct> {

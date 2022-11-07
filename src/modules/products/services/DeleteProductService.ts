@@ -7,7 +7,7 @@ import { IProductsRepository } from "../domain/repositories/IProductsRepository"
 @injectable()
 class DeleteProductService {
     constructor(
-        @inject('ProductRepository') private repository: IProductsRepository
+        @inject('ProductsRepository') private repository: IProductsRepository
     ) {}
 
     public async execute(id: string): Promise<void> {

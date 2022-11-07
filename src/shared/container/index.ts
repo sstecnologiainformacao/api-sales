@@ -6,9 +6,9 @@ import OrderRepository from '@modules/orders/infra/typeorm/repositories/OrdersRe
 import { IProductsRepository } from '@modules/products/domain/repositories/IProductsRepository';
 import { ProductRepository } from '@modules/products/infra/typeorm/repositories/ProductsRepository';
 import { IUserRepository } from '@modules/users/domain/repositories/IUserRepository';
-import UserRepository from 'dist/modules/users/typeorm/repositories/UserRepository';
 import { IUserTokenRepository } from '@modules/users/domain/repositories/IUserTokenRepository';
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
+import UserRepository from '@modules/users/infra/typeorm/repositories/UserRepository';
 
 container.registerSingleton<ICustomersRepository>('CustomerRepository', CustomerRepository);
 container.registerSingleton<IOrdersRepository>('OrdersRepository', OrderRepository);

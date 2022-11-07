@@ -7,7 +7,7 @@ import { IProduct } from "../domain/models/IProduct";
 @injectable()
 class ListProductService {
     constructor(
-        @inject('ProductRepository') private repository: IProductsRepository
+        @inject('ProductsRepository') private repository: IProductsRepository
     ) {}
 
     public async execute(): Promise<Array<IProduct> | null> {
