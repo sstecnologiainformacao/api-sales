@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import AppError from "@shared/errors/AppError";
 import { ICreateCustomer } from "@modules/customers/domain/models/ICreateCustomer";
 import { ICustomer } from "@modules/customers/domain/models/ICustomer";
 import { ICustomersRepository } from "../domain/repositories/ICustomersRepository";
+import AppError from "@shared/errors/AppError";
 
 @injectable()
 class CreateCustomerService {
