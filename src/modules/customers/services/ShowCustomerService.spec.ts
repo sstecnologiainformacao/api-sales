@@ -20,12 +20,7 @@ describe('ShowCustomerService', () => {
 
     it('should not be able to find the customer with a noon existent email', async () => {
         const repository = new FakeCustomerRepository();
-
-        const createCustomer = new CreateCustomerService(repository);
-        const { id } = await createCustomer.execute({ name: 'João Lucas', email: 'sstecnologiainformacao@gmail.com'});
-        expect(id).toBeNull();
-
         const showService: ShowCustomerService = new ShowCustomerService(repository);
-        expect(showService.execute({ id })).rejects.toBeInstanceOf(AppError);
+        expect(showService.execute({ id: 'random-id' })).rejects.toBeInstanceOf(AppError);
     });
 });

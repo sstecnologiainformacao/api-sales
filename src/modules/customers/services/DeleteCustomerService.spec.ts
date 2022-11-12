@@ -19,5 +19,11 @@ describe('DeleteCustomerService', () => {
         await deleteService.execute(customer.id);
         const showCustomerService: ShowCustomerService = new ShowCustomerService(fakeRepository);
         expect(showCustomerService.execute({ id: customer.id })).rejects.toBeInstanceOf(AppError);
-    })
+    });
+    it('shouldn\'t be able to delete a customer that wasn\'t found', async () => {
+        const fakeRepository = new FakeCustomerRepository();
+        const deleteService = new DeleteCustomerService(fakeRepository);
+
+        expect(deleteService.execute('random-id')).rejects.toBeInstanceOf(AppError);
+    });
 });
