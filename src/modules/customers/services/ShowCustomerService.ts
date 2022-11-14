@@ -16,7 +16,6 @@ class ShowCustomerService {
     public async execute({ id }: IRequest): Promise<ICustomer> {
         const customer = await this.repository.findById(id);
         if (!customer) {
-            console.log('-----------------------------')
             throw new AppError('Customer not found');
         }
 

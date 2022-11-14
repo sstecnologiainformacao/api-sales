@@ -33,7 +33,7 @@ class FakeCustomerRepository implements ICustomersRepository {
     }
 
     public async save(customer: Customer): Promise<Customer> {
-        this.customers.push(customer);
+        //this.customers.push(customer);
         return customer;
     }
 
