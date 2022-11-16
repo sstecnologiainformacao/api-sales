@@ -43,7 +43,7 @@ export class ProductRepository implements IProductsRepository {
         return await this.ormRepository.findOne(id);
     }
 
-    public async remove(product: IProduct): Promise<IProduct> {
+    public async remove(product: IProduct): Promise<IProduct | undefined> {
         return await this.ormRepository.remove(product);
     }
 

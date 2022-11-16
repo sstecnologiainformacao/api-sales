@@ -7,6 +7,6 @@ export interface IProductsRepository {
     save(product: IProduct): Promise<IProduct>;
     create({ name, price, quantity, }: CreateOrderProduct): Promise<IProduct>;
     findOne(id: string): Promise<IProduct | undefined>;
-    remove(product: IProduct): Promise<IProduct>;
+    remove(product: IProduct): Promise<IProduct | undefined>;
     find(): Promise<IProduct[]>;
 }
