@@ -1,5 +1,4 @@
 import { inject, injectable } from "tsyringe";
-import { getCustomRepository } from "typeorm";
 import RedisCache from "@shared/cache/RedisCache";
 import { IProductsRepository } from "../domain/repositories/IProductsRepository";
 import { IProduct } from "../domain/models/IProduct";

@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import AppError from "@shared/errors/AppError";
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository } from "typeorm"
 import RedisCache from '@shared/cache/RedisCache';
 import { IProductsRepository } from "../domain/repositories/IProductsRepository";
 
