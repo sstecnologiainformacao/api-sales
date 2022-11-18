@@ -74,6 +74,7 @@ class CreateOrderService {
         const updatedProductQuantity = orderProducts.map(
             product => ({
                 id: product.productId,
+                //@ts-ignore
                 quantity: existsProducts.find(p => p.id === product.productId)?.quantity - product.quantity || 0,
             })
         );
