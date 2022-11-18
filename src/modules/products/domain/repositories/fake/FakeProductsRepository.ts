@@ -23,6 +23,7 @@ class FakeProductsRepository implements IProductsRepository {
     }
 
     public async save(product: IProduct): Promise<IProduct> {
+        this.remove(product);
         this.products = [...this.products, product];
         return product;
     }
