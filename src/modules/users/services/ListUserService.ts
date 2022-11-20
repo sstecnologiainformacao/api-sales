@@ -3,7 +3,7 @@ import { IUserRepository } from "../domain/repositories/IUserRepository";
 import { IUser } from "../domain/models/IUser";
 
 @injectable()
-class ListProductService {
+class ListUserService {
     constructor(
         @inject('UserRepository') private repository: IUserRepository,
     ){}
@@ -13,4 +13,4 @@ class ListProductService {
     }
 };
 
-export default ListProductService;
+export default ListUserService;
