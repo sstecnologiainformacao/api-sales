@@ -1,6 +1,5 @@
 import { injectable, inject } from 'tsyringe';
 import AppError from "@shared/errors/AppError";
-import { getCustomRepository } from "typeorm";
 import { compare, hash } from 'bcryptjs';
 import { IUserRepository } from '../domain/repositories/IUserRepository';
 import { IUser } from '../domain/models/IUser';

@@ -32,6 +32,7 @@ class FakeUserRepository implements IUserRepository {
     }
 
     public async save(user: IUser): Promise<IUser> {
+        this.users = this.users.filter((item: IUser) => item.id !== user.id);
         this.users = [...this.users, user];
         return user;
     }
