@@ -4,4 +4,4 @@ RUN apk add --no-cache bash
 
 USER node
 
-WORKDIR /home/node/apk
+WORKDIR /home/node/app
