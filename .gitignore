@@ -11,3 +11,5 @@ dist
 uploads/*
 !uploads/.gitkeep
 coverage/
+
+.docker/dbdata
