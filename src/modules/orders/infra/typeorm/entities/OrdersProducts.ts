@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Order from "./Order";
 import { IOrdersProducts } from "@modules/orders/domain/models/IOrdersProducts";
-import Product from "@modules/products/infra/typeorm/entities/Product";
+import Product from "../../../../products/infra/typeorm/entities/Product";
 
 @Entity('orders_products')
 class OrdersProducts implements IOrdersProducts{

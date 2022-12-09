@@ -1,34 +1,36 @@
 import { ICreateCustomer } from "@modules/customers/domain/models/ICreateCustomer";
 import { ICustomer } from "@modules/customers/domain/models/ICustomer";
-import { ICustomersRepository } from "@modules/customers/domain/repositories/ICustomersRepository";
-import { getRepository, Repository } from "typeorm";
+import { ICustomersRepository, SearchParams } from "@modules/customers/domain/repositories/ICustomersRepository";
+import { Repository } from "typeorm";
 import Customer from "../entities/Customer";
+import { dataSource } from '@shared/infra/typeorm';
 
 class CustomerRepository implements ICustomersRepository {
     private ormRepository: Repository<Customer>;
 
     constructor() {
-        this.ormRepository = getRepository(Customer);
+        this.ormRepository = dataSource.getRepository(Customer);
     }
 
-    public async findByName(name: string): Promise<ICustomer | undefined> {
-        return this.ormRepository.findOne({
-            where: {
-                name,
-            }
-        });
+    public async findAll({ page, skip, take }: SearchParams): Promise<ICustomer[]> {
+        const [customers, count] = await this.ormRepository
+            .createQueryBuilder()
+            .skip(skip)
+            .take(take)
+            .getManyAndCount();
+        return customers;
     }
 
-    public async findById(id: string): Promise<ICustomer | undefined> {
-        return this.ormRepository.findOne({ id });
+    public async findByName(name: string): Promise<ICustomer | null> {
+        return this.ormRepository.findOneBy({ name });
     }
 
-    public async findByEmail(email: string): Promise<ICustomer | undefined> {
-        return this.ormRepository.findOne({
-            where: {
-                email,
-            }
-        });
+    public async findById(id: string): Promise<ICustomer | null> {
+        return this.ormRepository.findOneBy({ id });
+    }
+
+    public async findByEmail(email: string): Promise<ICustomer | null> {
+        return this.ormRepository.findOneBy({ email });
     }
 
     public async create({ name, email }: ICreateCustomer): Promise<Customer> {

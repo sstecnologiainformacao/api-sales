@@ -1,5 +1,5 @@
 import { ICustomer } from "@modules/customers/domain/models/ICustomer";
-import Customer from "@modules/customers/infra/typeorm/entities/Customer";
+import Customer from "../../../../customers/infra/typeorm/entities/Customer";
 import { IOrder } from "@modules/orders/domain/models/IOrder";
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
