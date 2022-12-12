@@ -1,20 +1,23 @@
-
+import { dataSource } from '@shared/infra/typeorm';
+import { Repository } from "typeorm";
 import { IOrder } from "@modules/orders/domain/models/IOrder";
 import { IOrdersRepository, IRequest, } from "@modules/orders/domain/repositories/IOrdersRepository";
-import { getRepository, Repository } from "typeorm";
 import Order from "../entities/Order";
 
 class OrderRepository implements IOrdersRepository {
     private ormRepository: Repository<Order>;
 
     constructor() {
-        this.ormRepository = getRepository(Order);
+        this.ormRepository = dataSource.getRepository(Order);
     }
 
-    public async findById(id: string): Promise<IOrder | undefined> {
-        return await this.ormRepository.findOne(id, {
-            relations:['orderProducts', 'customer'],
-        });
+    public async findById(id: string): Promise<IOrder | null> {
+        return await this.ormRepository.findOne(
+            {
+                where: { id },
+                relations:['orderProducts', 'customer'],
+            }
+        );
     }
 
     public async createOrder({ customer, products }: IRequest): Promise<IOrder> {

@@ -11,7 +11,7 @@ import UserTokensRepository from '@modules/users/infra/typeorm/repositories/User
 import UserRepository from '@modules/users/infra/typeorm/repositories/UserRepository';
 
 container.registerSingleton<ICustomersRepository>('CustomerRepository', CustomerRepository);
-container.registerSingleton<IOrdersRepository>('OrdersRepository', OrderRepository);
-container.registerSingleton<IProductsRepository>('ProductsRepository', ProductRepository);
+container.registerSingleton<IOrdersRepository>('OrderRepository', OrderRepository);
+container.registerSingleton<IProductsRepository>('ProductRepository', ProductRepository);
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IUserTokenRepository>('UserTokenRepository', UserTokensRepository);

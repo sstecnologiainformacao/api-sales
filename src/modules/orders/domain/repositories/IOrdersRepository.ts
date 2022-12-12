@@ -8,6 +8,6 @@ export interface IRequest {
 };
 
 export interface IOrdersRepository {
-    findById(id: string): Promise<IOrder | undefined>;
+    findById(id: string): Promise<IOrder | null>;
     createOrder({ customer, products }: IRequest): Promise<IOrder>
 };

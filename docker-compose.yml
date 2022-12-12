@@ -16,6 +16,8 @@ services:
     image: 'postgres'
     container_name: apivendas-db
     restart: always
+    ports:
+      - "5432:5432"
     tty: true
     environment:
       - POSTGRES_PASSWORD=docker

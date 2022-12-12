@@ -1,5 +1,4 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { pagination,  } from 'typeorm-pagination'
 import 'reflect-metadata';
 import { errors } from 'celebrate';
 import 'express-async-errors';
@@ -16,7 +15,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(rateLimiter);
-app.use(pagination);
 app.use('/files', express.static(upload.directory));
 app.use(routes);
 app.use(errors());

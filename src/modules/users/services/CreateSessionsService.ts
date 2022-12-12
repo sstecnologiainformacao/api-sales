@@ -23,7 +23,7 @@ class CreateSessionsService {
     ){}
 
     public async execute({ email, password }: IRequest): Promise<IResponse> {
-       const user: IUser | undefined = await this.repository.findByEmail(email);
+       const user: IUser | null = await this.repository.findByEmail(email);
 
         if (!user) {
             throw new AppError('Incorrect email/password combination', 401);
