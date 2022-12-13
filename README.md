@@ -9,3 +9,5 @@ This project is an implementation of an API to simulate API sales. Here some fea
 ## Technologies
 
 During the course libraries like TypeORM, Node, Express, Redis, Joi and etc were presented to us.
+
+https://www.udemy.com/certificate/UC-8b958a6e-3175-43e9-a55e-fabd434a5a52/
